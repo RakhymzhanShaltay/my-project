@@ -15,7 +15,7 @@ let difficulty = 1;
 let lives = 3;
 let bestScore = localStorage.getItem('bestScore') || 0;
 
-// Обновление лучшего результата
+
 function updateHighScore() {
     if (score > bestScore) {
         bestScore = score;
@@ -24,20 +24,20 @@ function updateHighScore() {
     highScoreDisplay.textContent = `Лучший результат: ${bestScore}`;
 }
 
-// Создание врагов с учетом сложности
+
 function createEnemy() {
     const x = Math.random() * (canvas.width - 50);
     const speed = 2 + Math.random() * 2 * difficulty;
     enemies.push({ x, y: 0, width: 40, height: 40, speed });
 }
 
-// Рисование игрока
+
 function drawPlayer() {
     ctx.fillStyle = "green";
     ctx.fillRect(player.x, player.y, player.width, player.height);
 }
 
-// Рисование пули
+
 function drawBullets() {
     ctx.fillStyle = "red";
     bullets.forEach((bullet, index) => {
@@ -47,7 +47,7 @@ function drawBullets() {
     });
 }
 
-// Рисование врагов
+
 function drawEnemies() {
     ctx.fillStyle = "blue";
     enemies.forEach((enemy, index) => {
@@ -63,7 +63,7 @@ function drawEnemies() {
     });
 }
 
-// Обработка столкновений
+
 function handleCollisions() {
     bullets.forEach((bullet, bulletIndex) => {
         enemies.forEach((enemy, enemyIndex) => {
@@ -84,7 +84,7 @@ function handleCollisions() {
     });
 }
 
-// Обновление игрока
+
 function updatePlayer() {
     if (keys["ArrowLeft"] && player.x > 0) {
         player.x -= player.speed;
@@ -94,12 +94,12 @@ function updatePlayer() {
     }
 }
 
-// Добавление пули
+
 function shoot() {
     bullets.push({ x: player.x + player.width / 2 - 2.5, y: player.y, width: 5, height: 10, speed: 7 });
 }
 
-// Основной цикл игры
+
 function gameLoop() {
     if (gameOver) {
         updateHighScore();
@@ -120,7 +120,7 @@ function gameLoop() {
     requestAnimationFrame(gameLoop);
 }
 
-// Слушатели событий
+
 document.addEventListener("keydown", (e) => {
     keys[e.key] = true;
     if (e.key === " ") shoot();
@@ -130,7 +130,6 @@ document.addEventListener("keyup", (e) => {
     keys[e.key] = false;
 });
 
-// Начало игры
 function startGame() {
     score = 0;
     gameOver = false;
@@ -149,7 +148,6 @@ function startGame() {
 
 startButton.addEventListener("click", startGame);
 
-// Отображение начального экрана
 function showMenu() {
     canvas.style.display = "none";
     menu.style.display = "flex";
